@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.ws.converter</groupId>
+    <artifactId>dubu-reader</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <java.bootstrap.classes>
+            ${java.home}/lib/rt.jar
+        </java.bootstrap.classes>
+        <java.cryptographic.extension.classes>
+            ${java.home}/lib/jce.jar
+        </java.cryptographic.extension.classes>
+        <java.secure.socket.extension.classes>
+            ${java.home}/lib/jsse.jar
+        </java.secure.socket.extension.classes>
+    </properties>
+
+
+    <!--<repositories>-->
+        <!--<repository>-->
+            <!--<id>maven-repository</id>-->
+            <!--<url>file:///${project.basedir}/maven-repository</url>-->
+        <!--</repository>-->
+    <!--</repositories>-->
+
+    <!--<repositories>-->
+        <!--<repository>-->
+            <!--<id>aspose-maven-repository</id>-->
+            <!--<url>http://maven.aspose.com/repository/repo/</url>-->
+        <!--</repository>-->
+        <!--<repository>-->
+            <!--<id>com.springsource.repository.bundles.external</id>-->
+            <!--<name>SpringSource Enterprise Bundle Repository - External Bundle Releases</name>-->
+            <!--<url>http://repository.springsource.com/maven/bundles/external</url>-->
+        <!--</repository>-->
+    <!--</repositories>-->
+
+    <dependencies>
+        <!--&lt;!&ndash;<dependency>&ndash;&gt;-->
+            <!--&lt;!&ndash;<groupId>com.aspose</groupId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<artifactId>aspose-slides</artifactId>&ndash;&gt;-->
+            <!--&lt;!&ndash;<version>17.8</version>&ndash;&gt;-->
+        <!--&lt;!&ndash;</dependency>&ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>com.aspose</groupId>-->
+            <!--<artifactId>aspose-slides</artifactId>-->
+            <!--<version>16.11.0</version>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.python/jython &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.python</groupId>-->
+            <!--<artifactId>jython</artifactId>-->
+            <!--<version>2.7.0</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>com.documents4j</groupId>-->
+            <!--<artifactId>documents4j-api</artifactId>-->
+            <!--<version>1.0.3</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.documents4j</groupId>-->
+            <!--<artifactId>documents4j-local</artifactId>-->
+            <!--<version>1.0.3</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.documents4j</groupId>-->
+            <!--<artifactId>documents4j-transformer</artifactId>-->
+            <!--<version>1.0.3</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>com.documents4j</groupId>-->
+            <!--<artifactId>documents4j-transformer-api</artifactId>-->
+            <!--<version>1.0.3</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.documents4j</groupId>-->
+            <!--<artifactId>documents4j-transformer-msoffice-excel</artifactId>-->
+            <!--<version>1.0.3</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.documents4j</groupId>-->
+            <!--<artifactId>documents4j-transformer-msoffice</artifactId>-->
+            <!--<version>1.0.3</version>-->
+            <!--<type>pom</type>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>commons-io</groupId>-->
+            <!--<artifactId>commons-io</artifactId>-->
+            <!--<version>2.5</version>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>18.0</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.github.wvengen</groupId>
+                <artifactId>proguard-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>proguard</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>proguard</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <options>
+                        <option>-keep public class * { public protected *; }</option>
+                    </options>
+                    <libs>
+                        <lib>${java.bootstrap.classes}</lib>
+                        <lib>${java.cryptographic.extension.classes}</lib>
+                        <lib>${java.secure.socket.extension.classes}</lib>
+                    </libs>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>net.sf.proguard</groupId>
+                        <artifactId>proguard-base</artifactId>
+                        <version>5.3.3</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>**/*.properties</exclude>
+                        <exclude>**/*.xml</exclude>
+                    </excludes>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>com.ws.converter.App</mainClass>
+                        </manifest>
+                        <!--<manifestEntries>-->
+                        <!--<Class-Path>conf/</Class-Path>-->
+                        <!--</manifestEntries>-->
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
